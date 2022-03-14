@@ -37,11 +37,11 @@ def player(board):
         for j in i:
             if j=='X' :
                 x+=1
-            elif j=="O":
+            elif j==O:
                 o+=1
     if x-o==1:
-        return "O"
-    return "X"
+        return O
+    return X
 
 
 def actions(board):
@@ -85,7 +85,7 @@ def winner(board):
     Returns the winner of the game, if there is one.
     """
     # Get last player to return later as the winner
-    lastPlayer = "X" if player(board) == "O" else "O"
+    lastPlayer = X if player(board) == O else O
 
     # Check for a 3 in a row win
     for i in board:
@@ -101,7 +101,7 @@ def winner(board):
     if board[2][0] == board[1][1] == board[0][2] == lastPlayer :
         return lastPlayer
     else :
-        return None
+        return EMPTY
 
 
 def terminal(board):
@@ -126,9 +126,9 @@ def utility(board):
     # Gets the winner using winner() function
     winPlayer = winner(board)
     # Retruns specified output
-    if winPlayer == "X":
+    if winPlayer == X:
         return 1
-    elif winPlayer == "O":
+    elif winPlayer == O:
         return -1
     else :
         return 0
@@ -140,7 +140,7 @@ def minimax(board):
     """
     # Returns max or min utility action depending on the current player
     # x is the maximizer, o is the minimizer
-    if player(board) == "X":
+    if player(board) == X:
         return maxVal(board)[1]
     else :
         return minVal(board)[1]
@@ -168,38 +168,5 @@ def minVal(board):
             v[0] = ut
             v[1] = action
     return v
-
-
-
-'''
-print(player([[EMPTY, "X", EMPTY],
-            ["X", EMPTY, "O"],
-            ["O", "X", "O"]]))
-
-print(actions([[EMPTY, "X", EMPTY],
-            ["X", EMPTY, "O"],
-            ["O", "X", "O"]]))
-
-print(result([[EMPTY, "X", EMPTY],
-            ["X", EMPTY, "O"],
-            ["O", "X", "O"]] , (0,2)))
-
-
-print(winner([["O", "X", "X"],
-            ["O", "X", "X"],
-            ["O", EMPTY, "O"]]))
-
-print(terminal([["O", "O", "X"],
-            ["X", "X", EMPTY],
-            ["X", "O", EMPTY]]))
-
-print(utility([["X", EMPTY, "O"],
-            ["O", "O", "X"],
-            ["O", "X", "X"]]))
-'''
-
-print(minimax([[EMPTY, EMPTY, EMPTY],
-            ["X", "O", EMPTY],
-            ["X", "O", EMPTY]]))
 
 
